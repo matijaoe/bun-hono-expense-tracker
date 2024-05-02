@@ -1,4 +1,6 @@
-# expense-tracker-demo
+# Yet Another Expense Tracker Build With Latest Hype Stack
+
+Bun ✕ Hono Expense Tracker Demo
 
 To install dependencies:
 
