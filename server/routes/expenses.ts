@@ -1,11 +1,12 @@
 import { zValidator } from '@hono/zod-validator'
 import { Hono } from 'hono'
 import { z } from 'zod'
+import { wait } from '../../frontend/src/utils'
 
 
 const expenseSchema = z.object({
   id: z.number().positive(),
-  name: z.string().min(3).max(100),
+  title: z.string().min(3).max(100),
   amount: z.number().nonnegative(),
 })
 
@@ -16,17 +17,17 @@ const expenseCreateSchema = expenseSchema.omit({ id: true })
 const EXPENSES: Expense[] = [
   {
     id: 1,
-    name: 'Internet',
+    title: 'Internet',
     amount: 40
   },
   {
     id: 2,
-    name: 'Rent',
+    title: 'Rent',
     amount: 1000
   },
   {
     id: 3,
-    name: 'Food',
+    title: 'Food',
     amount: 300
   }
 ]
@@ -42,9 +43,10 @@ const getExpenseIndexById = (id: number) => {
 
 export const expensesRoute = new Hono()
   .get('/', (c) => {
-    return c.json(EXPENSES)
+    return c.json({ expenses: EXPENSES })
   })
-  .get('/total', (c) => {
+  .get('/total', async (c) => {
+    await wait(2000)
     const total = EXPENSES.reduce((acc, expense) => acc + expense.amount, 0)
     return c.json({ total })
   })
@@ -55,7 +57,7 @@ export const expensesRoute = new Hono()
     if (!expense) {
       return c.notFound()
     }
-    return c.json(expense)
+    return c.json({ expense })
   })
   .post('/', zValidator('json', expenseCreateSchema), async (c) => {
     const data = c.req.valid('json')

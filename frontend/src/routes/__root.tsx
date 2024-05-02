@@ -11,26 +11,53 @@ const TanStackRouterDevtools =
 				}))
 			)
 
+const routes = [
+	{
+		to: '/',
+		label: 'Home',
+	},
+	{
+		to: '/about',
+		label: 'About',
+	},
+	{
+		to: '/expenses',
+		label: 'Expenses',
+	},
+]
+
 export const Route = createRootRoute({
-	component: () => (
-		<>
-			<div className="p-2 flex gap-2">
+	component: Root,
+})
+
+function Navbar() {
+	return (
+		<div className="p-2 flex gap-2">
+			{routes.map((route, index) => (
 				<Link
-					to="/"
+					key={index}
+					to={route.to}
 					className="[&.active]:font-bold"
 				>
-					Home
-				</Link>{' '}
-				<Link
-					to="/about"
-					className="[&.active]:font-bold"
-				>
-					About
+					{route.label}
 				</Link>
-			</div>
+			))}
+		</div>
+	)
+}
+
+function Root() {
+	return (
+		<>
+			<Navbar />
+
 			<hr />
-			<Outlet />
+
+			<div className="max-w-2xl mx-auto p-2">
+				<Outlet />
+			</div>
+
 			<TanStackRouterDevtools />
 		</>
-	),
-})
+	)
+}
