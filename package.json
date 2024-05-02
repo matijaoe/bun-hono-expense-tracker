@@ -16,6 +16,7 @@
   },
   "scripts": {
     "start": "bun run server/index.ts",
-    "dev": "bun run --watch server/index.ts"
+    "dev": "bun run --watch server/index.ts",
+    "deploy": "fly deploy"
   }
 }
