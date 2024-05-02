@@ -4,4 +4,4 @@ const server = Bun.serve({
   fetch: app.fetch,
 });
 
-console.log('Server running at', server.port)
+console.log('Server running at port', server.port)
