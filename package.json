@@ -7,5 +7,12 @@
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "hono": "^4.2.9",
+    "zod": "^3.23.5"
+  },
+  "scripts": {
+    "dev": "bun run --watch index.ts"
   }
 }
