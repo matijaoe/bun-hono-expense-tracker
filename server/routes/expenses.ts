@@ -44,6 +44,10 @@ export const expensesRoute = new Hono()
   .get('/', (c) => {
     return c.json(EXPENSES)
   })
+  .get('/total', (c) => {
+    const total = EXPENSES.reduce((acc, expense) => acc + expense.amount, 0)
+    return c.json({ total })
+  })
   .get('/:id{[0-9]+}', (c) => {
     const id = Number(c.req.param('id'))
     const expense = getExpenseById(id)
