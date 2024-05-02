@@ -1,4 +1,4 @@
-# Yet Another Expense Tracker Build With Latest Hype Stack
+# Yet Another Expense Tracker Built With Latest Hype Stack
 
 Bun ✕ Hono Expense Tracker Demo
 
